@@ -5,3 +5,7 @@ export * from './Conteudo';
 export * from './FormCriarTarefa';
 export * from './ListaTarefas';
 export * from './Rodape';
+export * from './Card';
+export * from './CardCarousel';
+export * from './Carrossel';
+export * from './Destaque';

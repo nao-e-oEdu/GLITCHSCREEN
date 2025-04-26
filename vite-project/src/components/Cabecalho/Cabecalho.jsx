@@ -1,40 +1,39 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { Menu } from './menu';
-// import logo from '../assets/logo.png'; // Ative se tiver logo
+import GlitchScreen from '../../assets/GlitchScreen.png';
 
 const Cabecalho = () => {
   return (
-    <header className="flex items-center justify-between px-6 py-4 border-b-4 border-lime-600 bg-stone-900 shadow-md">
-      <Menu/>
-      <Link to="/" className="flex items-center space-x-4">
-      <span className="text-lime-600 font-extrabold text-2xl">GlitchScreen</span>
-        {/* Logo */}
-        {/* <img src={logo} alt="Logo" className="w-10 h-10" /> */}
-        {/* Nome da Loja */}
-
-
-      </Link>
-
-      <div className="flex items-center space-x-4">
+    
+    <header className="flex items-center justify-between px-5 py-3 border-b-4 border-lime-600 bg-stone-900 shadow-md">
+        
+        <div className="flex items-center space-x-10">
+    <Menu />
+    <Link to="/" className="flex items-center space-x-2">
+      <span className="text-lime-600 font-extrabold text-xl font-roboto">GlitchScreen</span>
+      <img src={GlitchScreen} alt="GlitchScreen" className="w-7 h-7" />
+    </Link>
+  </div>
+   
+      <div className="flex items-center space-x-3">
         {/* Barra de busca */}
         <div className="flex">
           <input
             type="text"
             placeholder="Pesquisar jogo"
-            className="px-3 py-2 rounded-l-md bg-stone-700 text-white placeholder-gray-300 focus:outline-none"
+            className="px-2.5 py-1.5 rounded-l-md bg-stone-700 text-white placeholder-gray-300 focus:outline-none text-sm"
           />
-          <button className="px-4 py-2 bg-lime-600 text-white font-semibold rounded-r-md hover:bg-lime-600 transition">
+          <button className="px-3 py-1.5 bg-lime-600 text-white font-semibold rounded-r-md hover:bg-lime-500 transition text-sm mr-1.5">
             Buscar
           </button>
         </div>
 
         {/* Ícone de usuário */}
         <Link to="/perfil">
-          <div className="p-2 border-2 border-lime-600 rounded-full  text-lime-600  hover:bg-lime-600 hover:text-white transition">
+          <div className="p-1.5 border-2 border-lime-600 rounded-full text-lime-600 hover:bg-lime-600 mr-2 hover:text-white transition">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
