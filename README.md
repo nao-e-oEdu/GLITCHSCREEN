@@ -15,14 +15,14 @@ Built with **React**, **Vite**, and **TailwindCSS**, featuring routing, API requ
 - TailwindCSS
 - json-server (for simulating a backend API)
 
-## 🛠️ How to Run the Project
+## 🛠️ How to Run the Project (on the Visual Studio Code)
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/HickSouldrow/GLITCHSCREEN.git
 
 # Enter the project folder
-cd vite-project
+cd GlitchScreen/vite-project
 
 # Install all dependencies
 npm i
