@@ -9,7 +9,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-[60]"> {/* Aumente o z-index para acima do cabeçalho */}
       {/* Botão do menu Hamburger */}
       <button
         className="text-lime-500 focus:outline-none"
@@ -35,8 +35,7 @@ const Menu = () => {
       {/* Menu suspenso lateral com botão de fechar */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-stone-900 border-r-4 border-lime-600 text-white shadow-2xl transform ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300`}
+          menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 z-[60]`}
       >
         {/* Botão de fechar */}
         <button

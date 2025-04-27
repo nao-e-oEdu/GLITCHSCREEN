@@ -4,17 +4,16 @@ import GlitchScreen from '../../assets/GlitchScreen.png';
 
 const Cabecalho = () => {
   return (
-    
-    <header className="flex items-center justify-between px-5 py-3 border-b-4 border-lime-600 bg-stone-900 shadow-md">
-        
-        <div className="flex items-center space-x-10">
-    <Menu />
-    <Link to="/" className="flex items-center space-x-2">
-      <span className="text-lime-600 font-extrabold text-xl font-roboto">GlitchScreen</span>
-      <img src={GlitchScreen} alt="GlitchScreen" className="w-7 h-7" />
-    </Link>
-  </div>
-   
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 border-b-4 border-lime-600 bg-stone-900 shadow-md">
+      
+      <div className="flex items-center space-x-10">
+        <Menu />
+        <Link to="/" className="flex items-center space-x-2">
+          <span className="text-lime-600 font-extrabold text-xl font-roboto">GlitchScreen</span>
+          <img src={GlitchScreen} alt="GlitchScreen" className="w-7 h-7" />
+        </Link>
+      </div>
+      
       <div className="flex items-center space-x-3">
         {/* Barra de busca */}
         <div className="flex">

@@ -18,6 +18,12 @@ const Inicial = () => {
         <div className="mt-8 mb-20 w-full">
           <CardCarousel />
         </div>
+
+        <div className="w-full h-0.5 bg-lime-600 rounded-full my-12"></div>
+
+        <div className="mt-8 mb-20 w-full">
+          <CardCarousel />
+        </div>
       </main>
     </div>
   );

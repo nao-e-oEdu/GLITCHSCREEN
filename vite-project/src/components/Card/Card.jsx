@@ -14,7 +14,7 @@ const CardExemplo = () => {
                     <span className="text-lime-600 font-bold text-xs">-%</span>
                     <div className="flex items-center mt-1">
                         <span className="line-through text-gray-400 mr-1 text-xs">R$ 0,00</span>
-                        <span className="text-red-500 font-bold text-xs">R$ 0,00</span>
+                        <span className="text-lime-600 font-bold text-xs">R$ 0,00</span>
                     </div>
                 </div>
             </div>
