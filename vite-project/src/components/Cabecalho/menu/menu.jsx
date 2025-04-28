@@ -71,7 +71,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              to="/sobre-nos"
+              to="/SobreNos"
               className="text-lime-500 hover:bg-lime-600 hover:text-white p-3 rounded-md transition"
               onClick={() => setMenuOpen(false)}
             >
@@ -80,20 +80,20 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              to="/"
-              className="text-gray-400 hover:bg-stone-800 hover:text-white p-3 rounded-md transition"
+              to="/Contato"
+              className="text-lime-500 hover:bg-lime-600 hover:text-white p-3 rounded-md transition"
               onClick={() => setMenuOpen(false)}
             >
-              Em breve...
+              Contato
             </Link>
           </li>
           <li>
             <Link
-              to="/"
-              className="text-gray-400 hover:bg-stone-800 hover:text-white p-3 rounded-md transition"
+              to="/Termos"
+              className="text-lime-500 hover:bg-lime-600 hover:text-white p-3 rounded-md transition"
               onClick={() => setMenuOpen(false)}
             >
-              Em breve...
+              Termos
             </Link>
           </li>
           <li>
