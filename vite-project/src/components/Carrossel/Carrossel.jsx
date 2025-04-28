@@ -112,7 +112,7 @@ const Carousel = () => {
           <button 
             key={index}
             onClick={() => showSlide(index)}
-            className={`flex items-center bg-[#101014] text-white p-3 rounded-md text-left hover:bg-gray-800 transition ${
+            className={`flex items-center bg-stone-950 text-white p-3 rounded-md text-left hover:bg-stone-800 transition ${
               currentIndex === index ? 'ring-2 ring-lime-600' : ''
             }`}
           >
