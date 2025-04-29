@@ -7,3 +7,4 @@ export * from './Carrossel';
 export * from './Destaque';
 export * from './FormularioLogin';
 export * from './FormularioCadastro';
+export * from './Free2Play';
