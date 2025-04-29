@@ -43,13 +43,13 @@ const Rodape = () => {
           </Link>
 
           <div className="flex items-center space-x-6 text-sm">
-            <Link to="/sobre" className="text-gray-300 hover:text-lime-500 transition">
+            <Link to="/SobreNos" className="text-gray-300 hover:text-lime-500 transition">
               Sobre
             </Link>
-            <Link to="/contato" className="text-gray-300 hover:text-lime-500 transition">
+            <Link to="/Contato" className="text-gray-300 hover:text-lime-500 transition">
               Contato
             </Link>
-            <Link to="/termos" className="text-gray-300 hover:text-lime-500 transition">
+            <Link to="/Termos" className="text-gray-300 hover:text-lime-500 transition">
               Termos
             </Link>
           </div>
