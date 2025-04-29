@@ -3,3 +3,6 @@ export * from './Inicial';
 export * from './SobreNos';
 export * from './Contato';
 export * from './Termos';
+export * from './Cadastro';
+export * from './Login';
+export * from './Perfil';
