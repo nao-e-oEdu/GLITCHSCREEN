@@ -5,7 +5,7 @@ const SobreNos = () => {
         <h1 className="text-white text-3xl font-bold">Sobre Nós</h1>
         <div className="w-32 h-1 bg-lime-800 mx-auto mt-2"></div>
     </main>
-      <div className="mx-auto max-w-6xl px-4 text-white text-center animate-fadeIn"> 
+      <div className="mx-auto max-w-6xl px-4 mb-20 text-white text-center animate-fadeIn"> 
       <p className="text-lg font mb-4  text-justify">
           Bem-vindo à GlitchScreen, sua plataforma de jogos indie! Nosso objetivo é conectar jogadores a experiências únicas e inovadoras. A GlitchScreen não é apenas mais uma plataforma de jogos, mas sim um espaço onde a criatividade dos desenvolvedores independentes encontra o público ávido por novidades. Com jogos que vão desde os mais desafiadores até os mais relaxantes, garantimos uma experiência rica e diversificada. Acreditamos que a verdadeira magia dos jogos está em explorar novos mundos e ideias que fogem do convencional.
       </p>
