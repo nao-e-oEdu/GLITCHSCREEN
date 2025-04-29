@@ -5,3 +5,5 @@ export * from './Card';
 export * from './CardCarousel';
 export * from './Carrossel';
 export * from './Destaque';
+export * from './FormularioLogin';
+export * from './FormularioCadastro';
