@@ -60,16 +60,10 @@ const Free2Play = () => {
               <div className="bg-stone-800 rounded-lg shadow-lg overflow-hidden">
                 <div className="h-48 bg-stone-700"></div>
                 <div className="p-4">
-                  <p className="text-gray-300 text-sm">Jogo Pago</p>
+                  <p className="text-gray-300 text-sm">Jogo Gratuito</p>
                   <h3 className="text-lg font-bold text-white">Nome do Jogo 3</h3>
-                  <div className="mt-2">
-                    <span className="text-purple-500 font-bold">-30%</span>
-                    <div className="flex items-center mt-1">
-                      <span className="line-through text-gray-400 mr-2">R$ 50,00</span>
-                      <span className="text-green-400 font-bold">R$ 35,00</span>
-                    </div>
+                      <span className="text-green-400 font-bold">Gratuito</span>
                   </div>
-                </div>
               </div>
             </div>
           </div>
