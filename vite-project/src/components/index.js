@@ -8,3 +8,5 @@ export * from './Destaque';
 export * from './FormularioLogin';
 export * from './FormularioCadastro';
 export * from './Free2Play';
+export * from './3Cards';
+export * from './VejaMais';
