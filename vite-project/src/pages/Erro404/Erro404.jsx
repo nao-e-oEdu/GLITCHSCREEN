@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Erro404 = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-stone-900 to-stone-800 px-4">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="text-center border-2 border-lime-500 p-10 rounded-2xl shadow-[0_0_30px_#84cc16] animate-fade-in max-w-md">
         <h1 className="text-6xl font-extrabold text-lime-400 mb-4">404</h1>
         <h2 className="text-2xl text-white mb-2">Página não encontrada</h2>
