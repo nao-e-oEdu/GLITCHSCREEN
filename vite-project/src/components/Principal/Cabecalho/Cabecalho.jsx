@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Menu } from './menu';
-import GlitchScreen from '../../assets/GlitchScreen.png';
+import GlitchScreen from '../../../assets/GlitchScreen.png';
 
 const Cabecalho = () => {
   return (

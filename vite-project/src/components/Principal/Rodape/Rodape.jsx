@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import GlitchScreen from '../../assets/GlitchScreen.png';
+import GlitchScreen from '../../../assets/GlitchScreen.png';
 import { useState, useEffect } from 'react';
 
 const Rodape = () => {

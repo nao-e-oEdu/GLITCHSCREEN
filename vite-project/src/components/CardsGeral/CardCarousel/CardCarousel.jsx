@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardExemplo } from "../../components";
+import { CardExemplo } from "../../../components";
 
 const CardCarousel = () => {
   const totalCards = 20;
