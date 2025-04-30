@@ -13,13 +13,21 @@ const images = [
   "https://cdn.cloudflare.steamstatic.com/steam/apps/481510/header.jpg"
 ];
 
+const titles = [
+  "Explore o mundo vasto de Hollow Knight",
+  "Tenha uma aventura incrível desbravando os horizontes de Celeste",
+  "Descubra segredos e paisagens em Firewatch",
+  "Jogue Ori, uma obra prima em formato de Indie!",
+  "Viva histórias profundas em Night in the Woods"
+];
+
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const progressBarRef = useRef(null);
   const timeoutRef = useRef(null);
 
-  const SLIDE_DURATION = 5000; // 5 segundos(uma rapidinha)
-  const TRANSITION_DURATION = 1000; // Altera dps se achar melhor
+  const SLIDE_DURATION = 5000;
+  const TRANSITION_DURATION = 1000;
 
   const startProgressBar = () => {
     if (progressBarRef.current) {
@@ -54,7 +62,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="text-white p-6 rounded-lg overflow-hidden mt-10 flex z-40">
+    <div className="text-white p-6 overflow-hidden mt-10 animate-fade-in flex z-40">
       <div className="w-3/4 relative overflow-hidden">
         <div 
           className="flex"
@@ -64,15 +72,15 @@ const Carousel = () => {
           }}
         >
           {images.map((image, index) => (
-            <div 
-              key={index}
-              className="w-full flex-shrink-0"
-            >
+            <div key={index} className="w-full flex-shrink-0 relative">
               <img 
                 src={image} 
                 alt={`Slide ${index + 1}`} 
                 className="w-full h-96 object-cover rounded-lg"
               />
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-lg">
+                <h2 className="text-lg font-semibold"></h2>
+              </div>
             </div>
           ))}
         </div>
@@ -101,7 +109,7 @@ const Carousel = () => {
               className="w-10 h-10 mr-3 rounded-md object-cover"
             />
             <span className="hover:text-lime-600 flex-1 text-sm">
-              Slide {index + 1}
+            {titles[index]}
             </span>
             <span className="ml-auto text-stone-700 group-hover:text-lime-600">→</span>
           </button>
