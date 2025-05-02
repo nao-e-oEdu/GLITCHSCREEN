@@ -1,0 +1,9 @@
+{
+    "posts": [
+      { "id": 1, "title": "Primeiro Post", "content": "Conteúdo do post" }
+    ],
+    "users": [
+      { "id": 1, "name": "João", "email": "joao@example.com" }
+    ]
+  }
+    
