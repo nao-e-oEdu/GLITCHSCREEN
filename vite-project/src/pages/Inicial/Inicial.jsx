@@ -1,4 +1,4 @@
-import { CardCarousel, Carousel, Destaque } from '../../components';
+import { CardCarousel, Carousel, Destaque, Free2Play, LinhaPulsante, ThreeCards, VejaMais } from '../../components';
 
 const Inicial = () => {
   return (
@@ -9,7 +9,7 @@ const Inicial = () => {
           <Carousel />
         </div>
 
-        <div className="w-full h-0.5 bg-lime-600 rounded-full my-12"></div>
+        <LinhaPulsante/>
 
         <br></br>
               <Destaque />
@@ -19,10 +19,26 @@ const Inicial = () => {
           <CardCarousel />
         </div>
 
-        <div className="w-full h-0.5 bg-lime-600 rounded-full my-12"></div>
+        <LinhaPulsante/>
 
         <div className="mt-8 mb-20 w-full">
           <CardCarousel />
+        </div>
+
+        <LinhaPulsante/>
+
+        <br></br>
+              <VejaMais/>
+        <br></br>
+
+        <div className="mt-8 mb-20 w-full">
+          <Free2Play />
+        </div>
+
+        <LinhaPulsante/>
+        
+        <div className="mt-8 mb-20 w-full">
+          <ThreeCards />
         </div>
       </main>
     </div>
