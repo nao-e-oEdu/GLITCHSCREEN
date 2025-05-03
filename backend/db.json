@@ -12,6 +12,13 @@
       "password": "sim",
       "email": "eduardo@example.com",
       "token": "newToken123"
+    },
+    {
+      "id": "c3a4",
+      "username": "Prior",
+      "password": "prior123",
+      "email": "prior@email.com",
+      "token": "newToken123"
     }
   ]
 }
