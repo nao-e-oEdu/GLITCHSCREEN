@@ -47,3 +47,19 @@
 .animate-fadeIn {
   animation: fadeIn 1.5s ease-in-out forwards;
 }
+
+
+/* Adicione isso ao seu arquivo CSS global, se necessário */
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none; /* Oculta a barra de rolagem */
+}
+
+.carousel-container > * {
+  scroll-snap-align: start;
+}
