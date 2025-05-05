@@ -22,6 +22,7 @@ const CardCarousel = () => {
         setStartIndex(Math.max(startIndex - 3, 0));
     };
 
+    
     const proxCards = () => {
         setStartIndex(Math.min(startIndex + 3, jogos.length - 3));
     };
