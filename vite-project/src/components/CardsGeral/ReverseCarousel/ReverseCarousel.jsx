@@ -10,7 +10,11 @@ const ReverseCarousel = () => {
 
   useEffect(() => {
     axios.get('http://localhost:5000/jogos')
-      .then(response => setJogos(response.data))
+      .then(response => {
+        // Ordena os jogos em ordem decrescente de ID
+        const jogosOrdenados = [...response.data].sort((b, a) => a.id - b.id);
+        setJogos(jogosOrdenados);
+      })
       .catch(error => console.error('Erro ao buscar os dados:', error));
   }, []);
 
@@ -20,7 +24,7 @@ const ReverseCarousel = () => {
     setTimeout(() => {
       setStartIndex(newStartIndex);
       setIsAnimating(false);
-    }, 300); // mesma duração da animação
+    }, 300);
   };
 
   const anteCards = () => {
@@ -48,7 +52,6 @@ const ReverseCarousel = () => {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
-      {/* Animações inline (ou mova para Tailwind config) */}
       <style jsx>{`
         @keyframes slideOutLeft {
           from { transform: translateX(0); opacity: 1; }
@@ -81,7 +84,6 @@ const ReverseCarousel = () => {
       `}</style>
 
       <div className="flex items-center justify-between">
-        {/* Botão Esquerda */}
         <button
           onClick={anteCards}
           disabled={isAnimating || startIndex === 0}
@@ -89,17 +91,16 @@ const ReverseCarousel = () => {
             isAnimating || startIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
           }`}
         >
-       <svg width="15" height="15" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="10" height="10" fill="#44403c" rx="25" />
-    <path d="M30 10L15 25L30 40" stroke="#84cc16" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+          <svg width="15" height="15" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="10" height="10" fill="#44403c" rx="25" />
+            <path d="M30 10L15 25L30 40" stroke="#84cc16" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
 
-        {/* Container de cards */}
         <div className="flex overflow-hidden w-full h-64 relative">
           {mostrarCards.map((jogo, index) => (
             <div
-              key={`${startIndex}-${index}`}
+              key={`${jogo.id}-${index}`}
               className={`flex-shrink-0 w-1/5 px-2 ${
                 isAnimating ? getAnimationClass() :
                 direction === 'right' ? 'animate-slideInLeft' : 'animate-slideInRight'
@@ -110,7 +111,6 @@ const ReverseCarousel = () => {
           ))}
         </div>
 
-        {/* Botão Direita */}
         <button
           onClick={proxCards}
           disabled={isAnimating || startIndex + 5 >= jogos.length}
@@ -118,10 +118,10 @@ const ReverseCarousel = () => {
             isAnimating || startIndex + 5 >= jogos.length ? 'opacity-50 cursor-not-allowed' : ''
           }`}
         >
-     <svg width="15" height="15" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <rect width="10" height="10" fill="#44403c" rx="25" />
-         <path d="M20 10L35 25L20 40" stroke="#84cc16" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-         </svg>
+          <svg width="15" height="15" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="10" height="10" fill="#44403c" rx="25" />
+            <path d="M20 10L35 25L20 40" stroke="#84cc16" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
       </div>
     </div>

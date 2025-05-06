@@ -7,10 +7,13 @@ const RandomCarousel = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState(null);
-
   useEffect(() => {
     axios.get('http://localhost:5000/jogos')
-      .then(response => setJogos(response.data))
+      .then(response => {
+        // Embaralha os jogos de forma aleatória
+        const jogosAleatorios = [...response.data].sort(() => Math.random() - 0.5);
+        setJogos(jogosAleatorios);
+      })
       .catch(error => console.error('Erro ao buscar os dados:', error));
   }, []);
 

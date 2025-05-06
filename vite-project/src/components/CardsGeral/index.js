@@ -1,4 +1,5 @@
 export * from './3Cards';
+export * from './3Cards2';
 export * from './CardCarousel';
 export * from './Free2Play';
 export * from './Carrossel';
