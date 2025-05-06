@@ -76,7 +76,7 @@ const ThreeCards = () => {
     return (
       <div className="text-center text-white py-8">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-lime-500 mb-2"></div>
-        <p>Carregando jogos mais caros...</p>
+        <p>Carregando jogos...</p>
       </div>
     );
   }
@@ -105,8 +105,8 @@ const ThreeCards = () => {
   }
 
   return (
-    <div className="p-6 rounded-xl bg-gradient-to-br from-stone-900 via-lime-950 rounded-xl shadow-2xl">
-      <h2 className="text-xl font-bold text-lime-500 mb-6 text-center">JOGOS MAIS CAROS</h2>
+    <div className="p-6 rounded-xl bg-gradient-to-br from-stone-900 via-lime-950 shadow-2xl">
+      <h2 className="text-xl font-bold text-lime-500 mb-6 text-center">JOGOS POPULARES</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {jogos.map((jogo) => (
