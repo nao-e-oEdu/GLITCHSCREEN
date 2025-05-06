@@ -97,7 +97,7 @@ const ReverseCarousel = () => {
           </svg>
         </button>
 
-        <div className="flex overflow-hidden w-full h-64 relative">
+        <div className="flex overflow-hidden w-full h-90 py-2 relative">
           {mostrarCards.map((jogo, index) => (
             <div
               key={`${jogo.id}-${index}`}
