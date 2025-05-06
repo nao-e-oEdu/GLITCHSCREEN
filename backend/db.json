@@ -285,7 +285,7 @@
       "Preco": 90,
       "Descricao": "Sea of Stars é um RPG com batalhas por turnos inspirado pelos clássicos.",
       "Sinopse": "Sea of Stars é um RPG por turnos inspirado nos clássicos. Conta a história de dois Filhos do Solstício que combinarão os poderes do sol e da lua para realizar a Magia do Eclipse, a única força capaz de deter as criações monstruosas do malvado alquimista conhecido como The Fleshmancer",
-      "Desconto": 20
+      "Desconto": 100
     },
     {
       "CodJogo": 4,
@@ -297,7 +297,7 @@
       "Preco": 25,
       "Descricao": "Stardew Valley é um jogo de simulação agrícola inspirado principalmente em Story of Seasons, uma série da Marvelous e anteriormente conhecida como Harvest Moon.",
       "Sinopse": "Você herdou a antiga fazenda do seu avô, em Stardew Valley. Com ferramentas de segunda-mão e algumas moedas, você parte para dar início a sua nova vida. Será que você vai aprender a viver da terra, a transformar esse matagal em um próspero lar?",
-      "Desconto": 20
+      "Desconto": 100
     },
     {
       "CodJogo": 5,
@@ -357,7 +357,7 @@
       "Preco": 35,
       "Descricao": "Sem certezas acerca do destino da irmã, um rapaz entra no LIMBO",
       "Sinopse": "Limbo é um sidescroller 2D, incorporando um sistema de física que administra os objetos ambientais e o personagem do jogador. O jogador guia um menino anônimo através de ambientes e armadilhas perigosas enquanto procura por sua irmã mais velha.",
-      "Desconto": 0
+      "Desconto": 100
     },
     {
       "CodJogo": 10,
