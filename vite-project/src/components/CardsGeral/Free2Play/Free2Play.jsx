@@ -164,6 +164,10 @@ const Free2Play = () => {
             >
               <div className="relative">
                 <CardJogo jogo={jogo} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> b476a57 (FIX | Card Colors)
               </div>
             </div>
           ))}
