@@ -12,7 +12,7 @@ const ReverseCarousel = () => {
     axios.get('http://localhost:5000/jogos')
       .then(response => {
         // Ordena os jogos em ordem decrescente de ID
-        const jogosOrdenados = [...response.data].sort((b, a) => a.id - b.id);
+        const jogosOrdenados = [...response.data].reverse();
         setJogos(jogosOrdenados);
       })
       .catch(error => console.error('Erro ao buscar os dados:', error));
