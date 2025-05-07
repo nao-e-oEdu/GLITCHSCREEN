@@ -21,7 +21,7 @@ const CardJogo = ({ jogo }) => {
         <a href={`/jogo/${jogo.CodJogo}`} onClick={handleClick} className="block">
             <div className="bg-stone-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform hover:scale-105 w-40 md:w-44 mx-auto group">
                 {/* Imagem */}
-                <div className="relative w-full h-40 bg-lime-600 flex items-center justify-center overflow-hidden">
+                <div className="relative w-full h-50 bg-lime-600 flex items-center justify-center overflow-hidden">
                     {jogo.ImageUrl ? (
                         <img 
                             src={jogo.ImageUrl} 
