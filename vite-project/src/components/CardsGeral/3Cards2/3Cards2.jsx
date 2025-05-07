@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const CardJogo = ({ jogo }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+      e.preventDefault();
+      // Envia TODOS os dados do jogo para a página de detalhes
+      navigate(`/jogo/${jogo.CodJogo}`, { 
+          state: { 
+              jogoData: jogo,
+              fromCard: true 
+          }
+      });
+  };
+
   return (
     <div className="flex flex-col w-full bg-stone-800 rounded-lg shadow-lg overflow-hidden h-full transform transition duration-300 hover:scale-105 hover:shadow-xl">
+              <a href={`/jogo/${jogo.CodJogo}`} onClick={handleClick} className="block">
       <div className="h-60 bg-lime-600 flex items-center justify-center transition duration-300 hover:bg-lime-500">
         {jogo.ImageUrl ? (
           <img 
@@ -35,6 +50,7 @@ const CardJogo = ({ jogo }) => {
           </div>
         )}
       </div>
+   </a>
     </div>
   );
 };
@@ -122,7 +138,7 @@ const ThreeCards2 = () => {
 
   return (
     <div className="p-6 rounded-xl bg-gradient-to-br from-stone-900 via-lime-950 shadow-2xl">
-      <h2 className="text-xl font-bold text-lime-500 mb-6 text-center">MENORES PREÇOS DO MOMENTO</h2>
+      <h2 className="text-xl font-bold text-lime-500 mb-6 text-center">PREÇOS DO MOMENTO</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {jogos.map((jogo) => (
