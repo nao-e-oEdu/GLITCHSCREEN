@@ -5,9 +5,10 @@ const HorizontalGameCard = ({ jogo }) => {
   return (
     <div className="flex p-3 bg-stone-800 rounded-lg hover:bg-stone-700 transition-all">
       <div className="w-16 h-20 flex-shrink-0">
-        <div className="w-full h-full bg-lime-600 rounded-l-lg flex items-center justify-center">
+        {/*<div className="w-full h-full bg-lime-600 rounded-l-lg flex items-center justify-center">*/}
           {/* Um espaço para imagem no futuro */}
-        </div>
+        {/*</div>*/}
+        <img className="w-full h-full bg-lime-600 rounded-xl flex items-center justify-center" src={jogo.ImageUrl}></img>
       </div>
 
       <div className="flex flex-col justify-between ml-3 w-full">
