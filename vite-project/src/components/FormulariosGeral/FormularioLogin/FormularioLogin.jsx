@@ -12,26 +12,24 @@ const FormularioLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.get(`http://localhost:5000/users?username=${username}`);
       const user = response.data[0];
-
+  
       if (!user || user.password !== password) {
-        setError("Erro ao fazer login");
+        setError("Usuário ou senha inválidos");
         return;
       }
-
-      // Se o login for bem-sucedido, salva o token ou outro dado necessário
-      localStorage.setItem('token', user.token);
-
-      // Redireciona para a tela inicial ("/")
-      navigate("/");  // Redireciona para a página inicial após login
-
+  
+      localStorage.setItem('usuario', JSON.stringify(user));
+  
+      navigate("/");
     } catch (err) {
       setError("Erro ao fazer login");
     }
   };
+  
 
   return (
     <div className="max-w-sm mx-auto bg-gradient-to-b from-stone-800 to-stone-700 p-8 rounded-xl shadow-lg border-2 border-lime-800 
