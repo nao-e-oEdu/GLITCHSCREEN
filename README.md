@@ -36,10 +36,8 @@ npx json-server --watch db.json --port 5000
 # Install TailwindCSS
 npm install tailwindcss @tailwindcss/vite
 
-cd..
-
 # Enter the server folder
-cd backend
+cd ../backend
 
 # Install all dependencies
 npm i
