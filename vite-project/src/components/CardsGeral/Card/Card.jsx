@@ -1,15 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CardJogo = ({ jogo }) => {
+    const navigate = useNavigate();
     const precoOriginal = jogo.Preco.toFixed(2).replace('.', ',');
     const precoComDesconto = (jogo.Preco - (jogo.Desconto / 100) * jogo.Preco).toFixed(2).replace('.', ',');
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        // Envia TODOS os dados do jogo para a página de detalhes
+        navigate(`/jogo/${jogo.CodJogo}`, { 
+            state: { 
+                jogoData: jogo,
+                fromCard: true 
+            }
+        });
+    };
+
     return (
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Link to={`/jogo/${jogo.CodJogo}`} className="block">
+=======
+        <a href={`/jogo/${jogo.CodJogo}`} onClick={handleClick} className="block">
+>>>>>>> e45876a (FIX | Card Pages working)
             <div className="bg-stone-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform hover:scale-105 w-40 md:w-44 mx-auto group">
-                
                 {/* Imagem */}
                 <div className="relative w-full h-40 bg-lime-600 flex items-center justify-center overflow-hidden">
                     {jogo.ImageUrl ? (
@@ -34,10 +49,7 @@ const CardJogo = ({ jogo }) => {
                 <div className="p-3 flex flex-col justify-between h-28">
                     <div>
                         <p className="text-gray-400 text-xs">Jogo Base</p>
-                        <p 
-                            className="text-gray-100 font-semibold text-sm truncate" 
-                            title={jogo.Nome}
-                        >
+                        <p className="text-gray-100 font-semibold text-sm truncate" title={jogo.Nome}>
                             {jogo.Nome}
                         </p>
                     </div>
@@ -65,7 +77,7 @@ const CardJogo = ({ jogo }) => {
                     </div>
                 </div>
             </div>
-        </Link>
+        </a>
     );
 };
 
