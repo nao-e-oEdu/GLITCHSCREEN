@@ -16,7 +16,6 @@ const CardJogo = ({ jogo }) => {
       });
   };
 
-
   return (
   
     <div className="flex flex-col w-full bg-stone-800 rounded-lg shadow-lg overflow-hidden h-full transform transition duration-300 hover:scale-105 hover:shadow-xl">
@@ -41,7 +40,9 @@ const CardJogo = ({ jogo }) => {
             {jogo.Desconto > 0 && (
               <div className="flex items-center">
                 <span className="line-through text-gray-400 mr-2">R$ {jogo.Preco.toFixed(2).replace('.', ',')}</span>
-                <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md transform -rotate-2">
+                
+                <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                
                   -{jogo.Desconto}%
                 </span>
               </div>
@@ -101,7 +102,7 @@ const ThreeCards = () => {
 
   if (error) {
     return (
-      <div className="text-center text-red-500 py-8">
+      <div className="absolute top-2 left-2 bg-red-600 text-center py-8">
         <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
