@@ -4,46 +4,93 @@ import { FaStar, FaRegStar, FaShoppingCart, FaHeart, FaArrowLeft, FaChevronLeft,
 import Swal from 'sweetalert2';
 
 const Template_jogo = () => {
-    // Hooks de roteamento
     const location = useLocation();
     const navigate = useNavigate();
     const { CodJogo } = useParams();
     
-    // Estados
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [isLoading, setIsLoading] = useState(!location.state?.jogoData);
     const [game, setGame] = useState(location.state?.jogoData || null);
     const [quantity, setQuantity] = useState(1);
+    const [classificacao, setClassificacao] = useState(null);
+    const [requisitosMinimos, setRequisitosMinimos] = useState(null);
+    const [isChangingImage, setIsChangingImage] = useState(false);
 
-    // Busca os dados da API se não vieram do card
+    // Busca os dados completos do jogo
     useEffect(() => {
-        if (!location.state?.jogoData) {
-            const fetchGame = async () => {
-                try {
-                    setIsLoading(true);
+        const fetchGameData = async () => {
+            try {
+                setIsLoading(true);
+                
+                // Busca o jogo principal
+                let gameData;
+                if (!location.state?.jogoData) {
                     const response = await fetch(`http://localhost:5000/jogos?CodJogo=${CodJogo}`);
                     const data = await response.json();
-                    setGame(data[0] || null);
-                } catch (error) {
-                    console.error("Erro ao carregar jogo:", error);
-                } finally {
-                    setIsLoading(false);
+                    gameData = data[0] || null;
+                } else {
+                    gameData = location.state.jogoData;
                 }
-            };
-            fetchGame();
-        }
+
+                if (gameData) {
+                    setGame(gameData);
+                    
+                    // Busca a classificação indicativa
+                    const classificacaoResponse = await fetch(`http://localhost:5000/classificacoes?CodFaixaEtaria=${gameData.CodFaixaEtaria}`);
+                    const classificacaoData = await classificacaoResponse.json();
+                    setClassificacao(classificacaoData[0] || null);
+                    
+                    // Busca os requisitos mínimos
+                    const requisitosResponse = await fetch(`http://localhost:5000/reqminimos?ReqMinId=${gameData.ReqMinId}`);
+                    const requisitosData = await requisitosResponse.json();
+                    setRequisitosMinimos(requisitosData[0] || null);
+                }
+            } catch (error) {
+                console.error("Erro ao carregar dados do jogo:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchGameData();
     }, [CodJogo, location.state]);
 
-    // Manipuladores de eventos
-    const changeImage = (direction) => {
+    // Função para extrair todas as imagens do jogo
+    const getGameImages = () => {
+        const images = [];
+        if (game?.ImageUrl) images.push(game.ImageUrl);
+        
+        let i = 2;
+        while (game?.[`ImageUrl${i}`]) {
+            images.push(game[`ImageUrl${i}`]);
+            i++;
+        }
+        
+        return images;
+    };
+
+    const gameImages = getGameImages();
+
+    // Manipulador de mudança de imagem com animação
+    const changeImage = async (direction) => {
+        if (isChangingImage || gameImages.length <= 1) return;
+        
+        setIsChangingImage(true);
+        
+        // Espera 200ms para a animação de fade out
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
         setCurrentImageIndex(prev => {
             if (direction === 'next') {
-                return (prev + 1) % game.images.length;
+                return (prev + 1) % gameImages.length;
             } else {
-                return (prev - 1 + game.images.length) % game.images.length;
+                return (prev - 1 + gameImages.length) % gameImages.length;
             }
         });
+        
+        // Espera mais 50ms antes de permitir outra mudança
+        setTimeout(() => setIsChangingImage(false), 50);
     };
 
     const handleQuantityChange = (value) => {
@@ -78,10 +125,39 @@ const Template_jogo = () => {
         setShowPaymentModal(false);
     };
 
+    // Renderização da seção de requisitos
+    const renderRequisitos = () => {
+        if (!requisitosMinimos) return null;
+
+        return (
+            <div className="bg-stone-800 p-6 rounded-xl border border-lime-800 shadow-[0_0_5px_#84cc16]">
+                <h2 className="text-2xl font-semibold text-lime-400 mb-4">Requisitos do Sistema</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+                    <div>
+                        <h3 className="font-semibold text-lime-500 mb-2">Mínimos</h3>
+                        <ul className="space-y-2">
+                            <li><strong>SO:</strong> {requisitosMinimos.SOMin || "Não especificado"}</li>
+                            <li><strong>Processador:</strong> {requisitosMinimos.CPUMin || "Não especificado"}</li>
+                            <li><strong>Memória:</strong> {requisitosMinimos.RAMmin || "Não especificado"}</li>
+                            <li><strong>GPU:</strong> {requisitosMinimos.GPUMin || "Não especificado"}</li>
+                            <li><strong>Armazenamento:</strong> {requisitosMinimos.Armazenamento || "Não especificado"}</li>
+                            {requisitosMinimos.DirectXMin && (
+                                <li><strong>DirectX:</strong> {requisitosMinimos.DirectXMin}</li>
+                            )}
+                            {requisitosMinimos.OBS && (
+                                <li className="text-sm italic text-gray-400">{requisitosMinimos.OBS}</li>
+                            )}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     // Estados de carregamento e erro
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center min-h-screen bg-stone-900">
+            <div className="flex justify-center items-center min-h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime-500"></div>
             </div>
         );
@@ -89,7 +165,7 @@ const Template_jogo = () => {
 
     if (!game) {
         return (
-            <div className="flex flex-col justify-center items-center min-h-screen text-white bg-stone-900">
+            <div className="flex flex-col justify-center items-center min-h-screen text-white">
                 <h2 className="text-2xl mb-4">Jogo não encontrado</h2>
                 <button 
                     onClick={() => navigate('/')}
@@ -106,7 +182,7 @@ const Template_jogo = () => {
     const totalPrice = discountedPrice * quantity;
 
     return (
-        <div className="justify-center mt-20 mb-30 min-h-screen">
+        <div className="justify-center mt-12 mb-30 min-h-screen">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative py-8">
                 {/* Botão de voltar */}
                 <button 
@@ -127,24 +203,39 @@ const Template_jogo = () => {
                         {/* Galeria de imagens */}
                         <div className="mb-8 relative bg-stone-800 p-1 rounded-xl border border-lime-800 shadow-[0_0_10px_#84cc16]">
                             <div className="relative aspect-video rounded-lg overflow-hidden">
-                                <img 
-                                    src={game.images?.[currentImageIndex] || 'https://via.placeholder.com/800x450?text=Imagem+Indisponível'} 
-                                    alt={game.Nome} 
-                                    className="w-full h-full object-cover transition-opacity duration-300"
-                                />
+                                <div className="relative w-full h-full">
+                                    {/* Imagem principal com animação */}
+                                    <img 
+                                        src={gameImages[currentImageIndex] || 'https://via.placeholder.com/800x450?text=Imagem+Indisponível'} 
+                                        alt={game.Nome} 
+                                        className={`absolute w-full h-full object-cover transition-opacity duration-200 ${isChangingImage ? 'opacity-0' : 'opacity-100'}`}
+                                        key={currentImageIndex}
+                                    />
+                                    
+                                    {/* Imagem de placeholder durante a transição */}
+                                    {isChangingImage && (
+                                        <img 
+                                            src={gameImages[currentImageIndex] || 'https://via.placeholder.com/800x450?text=Imagem+Indisponível'} 
+                                            alt="Carregando..." 
+                                            className="absolute w-full h-full object-cover opacity-0"
+                                        />
+                                    )}
+                                </div>
                                 
                                 {/* Navegação */}
-                                {game.images?.length > 1 && (
+                                {gameImages.length > 1 && (
                                     <>
                                         <button 
                                             onClick={() => changeImage('prev')}
-                                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-stone-700 hover:bg-stone-600 p-3 rounded-full transition-all shadow-lg"
+                                            disabled={isChangingImage}
+                                            className={`absolute left-2 top-1/2 -translate-y-1/2 bg-stone-700 hover:bg-stone-600 p-3 rounded-full transition-all shadow-lg ${isChangingImage ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         >
                                             <FaChevronLeft className="w-5 h-5 text-lime-500" />
                                         </button>
                                         <button 
                                             onClick={() => changeImage('next')}
-                                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-stone-700 hover:bg-stone-600 p-3 rounded-full transition-all shadow-lg"
+                                            disabled={isChangingImage}
+                                            className={`absolute right-2 top-1/2 -translate-y-1/2 bg-stone-700 hover:bg-stone-600 p-3 rounded-full transition-all shadow-lg ${isChangingImage ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         >
                                             <FaChevronRight className="w-5 h-5 text-lime-500" />
                                         </button>
@@ -153,13 +244,18 @@ const Template_jogo = () => {
                             </div>
                             
                             {/* Miniaturas */}
-                            {game.images?.length > 1 && (
+                            {gameImages.length > 1 && (
                                 <div className="flex justify-center mt-4 space-x-2">
-                                    {game.images.map((img, index) => (
+                                    {gameImages.map((img, index) => (
                                         <button
                                             key={index}
-                                            onClick={() => setCurrentImageIndex(index)}
-                                            className={`w-16 h-12 rounded overflow-hidden transition-all ${currentImageIndex === index ? 'ring-2 ring-lime-500 shadow-[0_0_5px_#84cc16]' : 'opacity-70 hover:opacity-100 border border-stone-700'}`}
+                                            onClick={() => {
+                                                if (!isChangingImage && index !== currentImageIndex) {
+                                                    changeImage(index > currentImageIndex ? 'next' : 'prev');
+                                                }
+                                            }}
+                                            disabled={isChangingImage}
+                                            className={`w-16 h-12 rounded overflow-hidden transition-all ${currentImageIndex === index ? 'ring-2 ring-lime-500 shadow-[0_0_5px_#84cc16]' : 'opacity-70 hover:opacity-100 border border-stone-700'} ${isChangingImage ? 'cursor-not-allowed' : ''}`}
                                         >
                                             <img
                                                 src={img}
@@ -189,31 +285,7 @@ const Template_jogo = () => {
                         </div>
                         
                         {/* Requisitos */}
-                        <div className="bg-stone-800 p-6 rounded-xl border border-lime-800 shadow-[0_0_5px_#84cc16]">
-                            <h2 className="text-2xl font-semibold text-lime-400 mb-4">Requisitos do Sistema</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
-                                <div>
-                                    <h3 className="font-semibold text-lime-500 mb-2">Mínimos</h3>
-                                    <ul className="space-y-2">
-                                        <li><strong>SO:</strong> {game.Requisitos?.SOMin || "Não especificado"}</li>
-                                        <li><strong>Processador:</strong> {game.Requisitos?.CPUMin || "Não especificado"}</li>
-                                        <li><strong>Memória:</strong> {game.Requisitos?.RAMmin || "Não especificado"}</li>
-                                        <li><strong>GPU:</strong> {game.Requisitos?.GPUMin || "Não especificado"}</li>
-                                        <li><strong>Armazenamento:</strong> {game.Requisitos?.Armazenamento || "Não especificado"}</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold text-lime-500 mb-2">Recomendados</h3>
-                                    <ul className="space-y-2">
-                                        <li><strong>SO:</strong> {game.Requisitos?.SORecomendado || "Não especificado"}</li>
-                                        <li><strong>Processador:</strong> {game.Requisitos?.CPURecomendado || "Não especificado"}</li>
-                                        <li><strong>Memória:</strong> {game.Requisitos?.RAMrecomendada || "Não especificado"}</li>
-                                        <li><strong>GPU:</strong> {game.Requisitos?.GPURecomendada || "Não especificado"}</li>
-                                        <li><strong>Armazenamento:</strong> {game.Requisitos?.Armazenamento || "Não especificado"}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {renderRequisitos()}
                     </div>
                     
                     {/* Coluna direita - Informações de compra */}
@@ -234,7 +306,7 @@ const Template_jogo = () => {
                                         </span>
                                     </div>
                                 )}
-                                <span className="text-3xl font-bold text-lime-500">
+                                <span className="text-3xl font-bold text-white">
                                     R$ {discountedPrice.toFixed(2).replace('.', ',')}
                                 </span>
                             </div>
@@ -265,7 +337,7 @@ const Template_jogo = () => {
                             <div className="mb-6 border-t border-stone-700 pt-4">
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-300">Total:</span>
-                                    <span className="text-xl font-bold text-gray-300">
+                                    <span className="text-xl font-bold text-lime-500">
                                         R$ {totalPrice.toFixed(2).replace('.', ',')}
                                     </span>
                                 </div>
@@ -323,10 +395,13 @@ const Template_jogo = () => {
                                     </div>
                                 )}
                                 
-                                <div>
-                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Classificação</p>
-                                    <p className="text-white mt-1">{game.Classificacao || "Não classificada"}</p>
-                                </div>
+                                {/* Classificação indicativa */}
+                                {classificacao && (
+                                    <div>
+                                        <p className="text-gray-400 text-sm uppercase tracking-wider">Classificação</p>
+                                        <p className="text-white mt-1">{classificacao.ClassificacaoIndicativa || "Não classificada"}</p>
+                                    </div>
+                                )}
                                 
                                 <div>
                                     <p className="text-gray-400 text-sm uppercase tracking-wider">Lançamento</p>
@@ -336,26 +411,6 @@ const Template_jogo = () => {
                                 </div>
                             </div>
                         </div>
-                        
-                        {/* Informações da desenvolvedora */}
-                        {game.Desenvolvedora && (
-                            <div className="bg-stone-800 p-6 rounded-xl border border-lime-800 shadow-[0_0_5px_#84cc16] mt-6">
-                                <h3 className="text-2xl font-semibold text-lime-400 mb-4">Desenvolvedora</h3>
-                                <div className="space-y-2">
-                                    <p className="text-white font-medium">{game.Desenvolvedora.NomeDesenvolvedora || "Não informado"}</p>
-                                    {game.Desenvolvedora.SiteOficial && (
-                                        <a 
-                                            href={game.Desenvolvedora.SiteOficial} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-lime-500 hover:underline text-sm block"
-                                        >
-                                            Site oficial
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>

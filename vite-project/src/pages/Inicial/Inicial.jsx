@@ -21,16 +21,15 @@ const Inicial = () => {
 
         <LinhaPulsante/>
 
+        <br></br>
+              <VejaMais/>
+        <br></br>
+
         <div className="mt-8 mb-20 w-full">
           <ReverseCarousel />
         </div>
 
         <LinhaPulsante/>
-
-        <br></br>
-              <VejaMais/>
-        <br></br>
-
         <div className="mt-8 mb-20 w-full">
           <Free2Play />
         </div>
