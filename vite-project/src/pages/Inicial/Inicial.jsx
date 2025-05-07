@@ -22,7 +22,7 @@ const Inicial = () => {
         <LinhaPulsante/>
 
         <br></br>
-              <VejaMais/>
+              <VejaMais/> 
         <br></br>
 
         <div className="mt-8 mb-20 w-full">
