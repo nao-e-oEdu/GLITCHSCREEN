@@ -2,22 +2,36 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const HorizontalGameCard = ({ jogo }) => {
+  const precoOriginal = jogo.Preco.toFixed(2).replace('.', ',');
+  const precoComDesconto = (jogo.Preco - (jogo.Desconto / 100) * jogo.Preco).toFixed(2).replace('.', ',');
+
   return (
-    <div className="flex p-3 bg-stone-800 rounded-lg hover:bg-stone-700 transition-all">
-      <div className="w-16 h-20 flex-shrink-0">
-        {/*<div className="w-full h-full bg-lime-600 rounded-l-lg flex items-center justify-center">*/}
-          {/* Um espaço para imagem no futuro */}
-        {/*</div>*/}
+    <div className="flex bg-stone-800 rounded-lg hover:bg-stone-700 transition-all h-26">
+      <div className="w-22 h-26 flex-shrink-0">
         <img className="w-full h-full bg-lime-600 rounded-xl flex items-center justify-center" src={jogo.ImageUrl}></img>
       </div>
 
-      <div className="flex flex-col justify-between ml-3 w-full">
-        <p className="text-white font-bold text-sm truncate">{jogo.Nome}</p>
-        <div className="flex items-center mt-1">
-          <span className="text-lime-500 font-bold text-sm">
-            R$ {jogo.Preco.toFixed(2)}
-          </span>
+      <div className="flex flex-col justify-between ml-3 w-full mt-3 mb-3">
+
+        <div className="flex w-full justify-between">
+          {/*Título*/}
+          <p className="text-white font-bold text-sm truncate">{jogo.Nome}</p>
+          
+          {/*Ícone de desconto*/}
+          {jogo.Desconto > 0 && (
+              <div className="bg-red-600 text-white text-xs font-bold px-1 py-0 rounded shadow-md transform -rotate-2 mr-3">
+                -{jogo.Desconto}%
+              </div>
+          )}
         </div>
+
+        <div className="flex items-center mt-1">
+          <div className="flex items-center gap-1 mt-1 flex-col">
+            <span className="line-through text-gray-400 text-xs">R$ {precoOriginal}</span>
+            <span className="text-lime-500 font-bold text-sm">R$ {precoComDesconto}</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );
