@@ -8,7 +8,7 @@ const HorizontalGameCard = ({ jogo }) => {
   return (
     <div className="flex bg-stone-800 rounded-lg hover:bg-stone-700 transition-all h-26">
       <div className="w-22 h-26 flex-shrink-0">
-        <img className="w-full h-full bg-lime-600 rounded-xl flex items-center justify-center" src={jogo.ImageUrl}></img>
+        <img className="w-full h-full bg-lime-600 rounded-l-lg flex items-center justify-center" src={jogo.ImageUrl}></img>
       </div>
 
       <div className="flex flex-col justify-between ml-3 w-full mt-3 mb-3">
