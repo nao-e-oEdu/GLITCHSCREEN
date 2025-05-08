@@ -7,3 +7,4 @@ export * from './Cadastro';
 export * from './Login';
 export * from './Perfil';
 export * from './Template_jogo';
+export * from './PesquisaResultado';

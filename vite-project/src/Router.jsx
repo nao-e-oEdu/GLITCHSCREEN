@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { LayoutPadrao } from './layouts';
-import { Erro404, Inicial, SobreNos, Termos, Contato, Login, Cadastro, Perfil,  } from './pages';
+import { Erro404, Inicial, SobreNos, Termos, Contato, Login, Cadastro, Perfil, Resultados,  } from './pages';
 import Template_jogo from './pages/Template_jogo/Template_jogo';
 
 
@@ -18,6 +18,7 @@ const Router = () => {
         <Route path="/Cadastro" element={<Cadastro />} />
         <Route path="/Perfil" element={<Perfil />} />
         <Route path="/jogo/:CodJogo" element={<Template_jogo />} />
+        <Route path="/Resultado" element={<Resultados />} />
         </Route>
     </Routes>
   );
