@@ -6,6 +6,28 @@ import { useState } from 'react';
 
 const Cabecalho = () => {
   const [pesquisa, setPesquisa] = useState("");
+  const [jogosBuscados, setJogosBuscados] = useState([]);
+
+  const buscarJogos = async () => {
+    try {      
+      const response = (await fetch(`http://localhost:5000/jogos`));
+      const data = await response.json();
+      const filtrados = [];
+
+      data.forEach(element => {
+        if (element.Nome.toLowerCase().includes(pesquisa.toLowerCase())) {
+          filtrados.push(element);
+        }
+      });
+
+      setJogosBuscados(filtrados);
+
+      console.log(filtrados);
+    } catch (error) {
+      console.error("Erro ao buscar jogos:", error);
+    }
+  };
+  
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 border-b-4 border-lime-600 bg-stone-900 shadow-md">
@@ -22,10 +44,11 @@ const Cabecalho = () => {
         {/* Barra de busca */}
         <BarraPesquisa 
         placeholder="Pesquisar Jogo" 
-        type="text" 
+        type="text"
         name="pesquisa"
         value={pesquisa}
         onChange={(e) => setPesquisa(e.target.value)}
+        onClick={buscarJogos}
         />
 
         {/* Ícone de usuário */}
