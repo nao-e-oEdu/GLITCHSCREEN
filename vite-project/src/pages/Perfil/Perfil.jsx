@@ -127,27 +127,36 @@ const Perfil = () => {
       </div>
 
       <div className="w-full md:w-2/3 bg-stone-800 border border-stone-600 rounded-xl p-6 shadow-lg text-white">
-        <h3 className="text-xl font-bold text-lime-500 mb-4">Meus jogos</h3>
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-xl font-bold text-lime-500">Meus jogos</h3>
+    <a
+      href="/"
+      className="text-sm text-lime-400 hover:underline transition"
+    >
+      Conheça nossa vasta biblioteca de jogos &rarr;
+    </a>
+  </div>
 
-        {jogos.length > 0 ? (
-          <ul className="space-y-4">
-            {jogos.map(jogo => (
-              <li key={jogo.CodJogo} className="flex items-start gap-4 border-b border-stone-600 pb-4">
-                <img src={jogo.Imagem} alt={jogo.Nome} className="w-20 h-20 object-cover rounded" />
-                <div className="flex-1">
-                  <p className="text-lg font-semibold text-white">{jogo.Nome}</p>
-                  <p className="text-sm text-gray-400">{jogo.Sinopse}</p>
-                  <p className="text-sm text-lime-400 mt-1">
-                    R$ {(jogo.Preco * (1 - (jogo.Desconto || 0) / 100)).toFixed(2).replace('.', ',')}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-400">Nenhum jogo adquirido ainda.</p>
-        )}
-      </div>
+  {jogos.length > 0 ? (
+    <ul className="space-y-4">
+      {jogos.map(jogo => (
+        <li key={jogo.CodJogo} className="flex items-start gap-4 border-b border-stone-600 pb-4">
+          <img src={jogo.Imagem} alt={jogo.Nome} className="w-20 h-20 object-cover rounded" />
+          <div className="flex-1">
+            <p className="text-lg font-semibold text-white">{jogo.Nome}</p>
+            <p className="text-sm text-gray-400">{jogo.Sinopse}</p>
+            <p className="text-sm text-lime-400 mt-1">
+              R$ {(jogo.Preco * (1 - (jogo.Desconto || 0) / 100)).toFixed(2).replace('.', ',')}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-gray-400">Nenhum jogo adquirido ainda.</p>
+  )}
+</div>
+
 
       {mostrarModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">

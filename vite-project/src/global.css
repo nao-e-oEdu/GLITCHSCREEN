@@ -63,3 +63,18 @@
 .carousel-container > * {
   scroll-snap-align: start;
 }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn.slide-in {
+  animation: slideIn 0.6s ease-out both;
+}
