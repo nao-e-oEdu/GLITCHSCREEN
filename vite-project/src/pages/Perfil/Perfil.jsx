@@ -9,7 +9,7 @@ const Perfil = () => {
   });
 
   const navigate = useNavigate();
-  
+
   const logout = () => {
     localStorage.removeItem('usuario');
     navigate(-1);
@@ -17,7 +17,7 @@ const Perfil = () => {
 
   const [mostrarModal, setMostrarModal] = useState(false);
   const [jogos, setJogos] = useState([]);
-  
+
   const [form, setForm] = useState({
     name: usuario?.name || '',
     email: usuario?.email || '',
@@ -67,8 +67,7 @@ const Perfil = () => {
   const salvar = async () => {
     setLoading(true);
     try {
-      // Lógica para salvar as alterações do perfil
-      await axios.put('http://localhost:5000/users', form); // Exemplo de endpoint, adapte conforme sua API
+      await axios.put('http://localhost:5000/users', form);
       setUsuario((prevState) => ({
         ...prevState,
         ...form
@@ -92,7 +91,6 @@ const Perfil = () => {
 
   return (
     <div className="min-h-screen mt-20 flex flex-col md:flex-row justify-center items-start px-4 py-10 gap-10 bg-stone-900 text-white">
-      {/* Card de Perfil (esquerda) */}
       <div className="w-full md:w-1/3 bg-gradient-to-b from-stone-800 to-stone-700 p-6 rounded-xl shadow-lg border-2 border-lime-800 relative before:absolute before:inset-0 before:border before:border-lime-800 before:rounded-xl before:shadow-[0_0_15px_#84cc16] before:animate-pulse">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-24 h-24 mx-auto rounded-full border-4 stroke-width-2 border-lime-600 mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A8.966 8.966 0 0112 15c2.21 0 4.21.8 5.879 2.121M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -128,17 +126,21 @@ const Perfil = () => {
         </div>
       </div>
 
-      {/* Meus Jogos (direita) */}
       <div className="w-full md:w-2/3 bg-stone-800 border border-stone-600 rounded-xl p-6 shadow-lg text-white">
         <h3 className="text-xl font-bold text-lime-500 mb-4">Meus jogos</h3>
 
         {jogos.length > 0 ? (
           <ul className="space-y-4">
             {jogos.map(jogo => (
-              <li key={jogo.CodJogo} className="border-b border-stone-600 pb-2">
-                <p className="text-lg font-semibold text-white">{jogo.Nome}</p>
-                <p className="text-sm text-gray-400">{jogo.Sinopse}</p>
-                <p className="text-sm text-lime-400 mt-1">R$ {jogo.Preco - (jogo.Desconto || 0)}</p>
+              <li key={jogo.CodJogo} className="flex items-start gap-4 border-b border-stone-600 pb-4">
+                <img src={jogo.Imagem} alt={jogo.Nome} className="w-20 h-20 object-cover rounded" />
+                <div className="flex-1">
+                  <p className="text-lg font-semibold text-white">{jogo.Nome}</p>
+                  <p className="text-sm text-gray-400">{jogo.Sinopse}</p>
+                  <p className="text-sm text-lime-400 mt-1">
+                    R$ {(jogo.Preco * (1 - (jogo.Desconto || 0) / 100)).toFixed(2).replace('.', ',')}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
@@ -147,7 +149,6 @@ const Perfil = () => {
         )}
       </div>
 
-      {/* Modal para Editar Perfil */}
       {mostrarModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white text-black p-6 rounded-lg w-full max-w-md">

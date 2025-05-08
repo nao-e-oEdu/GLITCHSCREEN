@@ -7,3 +7,9 @@ db.serialize(() => {
 });
 
 module.exports = db;
+
+// No seu componente de Login, após o login bem-sucedido:
+localStorage.setItem('usuario', JSON.stringify(usuario));
+// Dispara evento para notificar outros componentes
+window.dispatchEvent(new Event('storage'));
+navigate('/');
