@@ -56,9 +56,12 @@ const Carousel = () => {
     return () => clearTimeout(timeoutRef.current);
   }, []);
 
-  const goToSlide = (index) => {
+  const handleMainImageClick = () => {
+    navigate(`/jogo/${CodJogo[currentIndex]}`);
+  };
+
+  const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
-    navigate(`/jogo/${CodJogo[index]}`);
   };
 
   return (
@@ -76,9 +79,9 @@ const Carousel = () => {
               <img
                 src={image}
                 alt={`Slide ${index + 1}`}
-                className="w-full h-96 object-cover rounded-lg"
+                className="w-full h-96 object-cover rounded-lg cursor-pointer"
+                onClick={handleMainImageClick}
               />
-
             </div>
           ))}
         </div>
@@ -96,7 +99,7 @@ const Carousel = () => {
         {images.map((thumbnail, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
+            onClick={() => handleThumbnailClick(index)}
             className={`flex items-center bg-stone-950 text-white p-3 rounded-md text-left hover:bg-stone-800 transition ${
               currentIndex === index ? 'ring-2 ring-lime-600' : ''
             }`}

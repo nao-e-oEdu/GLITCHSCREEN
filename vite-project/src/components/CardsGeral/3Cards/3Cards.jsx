@@ -37,16 +37,20 @@ const CardJogo = ({ jogo }) => {
           <span className="text-lime-600 font-bold">Gratuito</span>
         ) : (
           <div>
-            {jogo.Desconto > 0 && (
-              <div className="flex items-center">
-                <span className="line-through text-gray-400 mr-2">R$ {jogo.Preco.toFixed(2).replace('.', ',')}</span>
-                
-                <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                
-                  -{jogo.Desconto}%
-                </span>
-              </div>
-            )}
+<div className="relative flex items-center">
+  {jogo.Desconto > 0 && (
+    <>
+      <span className="line-through text-gray-400 mr-2">
+        R$ {jogo.Preco.toFixed(2).replace('.', ',')}
+      </span>
+
+      <span className="absolute bottom-70 left-0.5 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+        -{jogo.Desconto}%
+      </span>
+    </>
+  )}
+</div>
+
             <span className="text-lime-600 font-bold">
               R$ {(jogo.Preco * (1 - jogo.Desconto/100)).toFixed(2).replace('.', ',')}
             </span>
